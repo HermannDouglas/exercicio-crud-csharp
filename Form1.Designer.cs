@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblId = new Label();
             lblNome = new Label();
-            tbxId = new TextBox();
             tbxNome = new TextBox();
             lblSelecionaUsuario = new Label();
             rbtnAluno = new RadioButton();
@@ -44,42 +42,26 @@
             ((System.ComponentModel.ISupportInitialize)dgvDados).BeginInit();
             SuspendLayout();
             // 
-            // lblId
-            // 
-            lblId.AutoSize = true;
-            lblId.Location = new Point(27, 40);
-            lblId.Name = "lblId";
-            lblId.Size = new Size(20, 15);
-            lblId.TabIndex = 0;
-            lblId.Text = "Id:";
-            // 
             // lblNome
             // 
             lblNome.AutoSize = true;
-            lblNome.Location = new Point(162, 40);
+            lblNome.Location = new Point(50, 50);
             lblNome.Name = "lblNome";
             lblNome.Size = new Size(43, 15);
             lblNome.TabIndex = 1;
             lblNome.Text = "Nome:";
             // 
-            // tbxId
-            // 
-            tbxId.Location = new Point(53, 37);
-            tbxId.Name = "tbxId";
-            tbxId.Size = new Size(100, 23);
-            tbxId.TabIndex = 2;
-            // 
             // tbxNome
             // 
-            tbxNome.Location = new Point(211, 37);
+            tbxNome.Location = new Point(99, 47);
             tbxNome.Name = "tbxNome";
-            tbxNome.Size = new Size(246, 23);
+            tbxNome.Size = new Size(320, 23);
             tbxNome.TabIndex = 3;
             // 
             // lblSelecionaUsuario
             // 
             lblSelecionaUsuario.AutoSize = true;
-            lblSelecionaUsuario.Location = new Point(27, 72);
+            lblSelecionaUsuario.Location = new Point(50, 78);
             lblSelecionaUsuario.Name = "lblSelecionaUsuario";
             lblSelecionaUsuario.Size = new Size(152, 15);
             lblSelecionaUsuario.TabIndex = 4;
@@ -88,7 +70,7 @@
             // rbtnAluno
             // 
             rbtnAluno.AutoSize = true;
-            rbtnAluno.Location = new Point(185, 70);
+            rbtnAluno.Location = new Point(208, 76);
             rbtnAluno.Name = "rbtnAluno";
             rbtnAluno.Size = new Size(57, 19);
             rbtnAluno.TabIndex = 5;
@@ -99,7 +81,7 @@
             // rbtnProfessor
             // 
             rbtnProfessor.AutoSize = true;
-            rbtnProfessor.Location = new Point(248, 70);
+            rbtnProfessor.Location = new Point(271, 76);
             rbtnProfessor.Name = "rbtnProfessor";
             rbtnProfessor.Size = new Size(74, 19);
             rbtnProfessor.TabIndex = 6;
@@ -110,7 +92,7 @@
             // rbtnServidor
             // 
             rbtnServidor.AutoSize = true;
-            rbtnServidor.Location = new Point(328, 70);
+            rbtnServidor.Location = new Point(351, 76);
             rbtnServidor.Name = "rbtnServidor";
             rbtnServidor.Size = new Size(68, 19);
             rbtnServidor.TabIndex = 7;
@@ -184,9 +166,7 @@
             Controls.Add(rbtnAluno);
             Controls.Add(lblSelecionaUsuario);
             Controls.Add(tbxNome);
-            Controls.Add(tbxId);
             Controls.Add(lblNome);
-            Controls.Add(lblId);
             Name = "Form1";
             Text = "Sistema Acadêmico";
             ((System.ComponentModel.ISupportInitialize)dgvDados).EndInit();
@@ -195,12 +175,8 @@
         }
 
         #endregion
-
-        private Label lblId;
         private Label lblNome;
         private Label lblSelecionaUsuario;
-
-        private TextBox tbxId;
         private TextBox tbxNome;
 
         private RadioButton rbtnAluno;

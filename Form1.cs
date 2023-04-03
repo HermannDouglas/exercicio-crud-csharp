@@ -15,9 +15,8 @@ namespace AppCRUD
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(tbxId.Text);
             string nome = tbxNome.Text;
-            string tipoUsuario = verificaTipoUsuario();
+            string tipoUsuario = GetTipoUsuarioSelecionado();
 
             MySqlConnection con = new MySqlConnection(
             "server = localhost; " +
@@ -26,9 +25,8 @@ namespace AppCRUD
             "password = root;");
 
             MySqlCommand cmd = new MySqlCommand(
-                "insert into usuario values ('" + id +
-                "','" + nome +
-                "','" + tipoUsuario + "'); "
+                "insert into usuario (nome, tipo) values ('" + nome +
+                "','" + tipoUsuario + "')"
                 , con);
 
             con.Open();
@@ -40,9 +38,9 @@ namespace AppCRUD
 
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(tbxId.Text);
+            int id = Convert.ToInt32(dgvDados.CurrentRow.Cells[0].Value);
             string nome = tbxNome.Text;
-            string tipoUsuario = verificaTipoUsuario();
+            string tipoUsuario = GetTipoUsuarioSelecionado();
 
             MySqlConnection con = new MySqlConnection(
                 "server = localhost; " +
@@ -64,8 +62,7 @@ namespace AppCRUD
 
         private void btnDeletar_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(tbxId.Text);
-
+            int id = Convert.ToInt32(dgvDados.CurrentRow.Cells[0].Value);
 
             MySqlConnection con = new MySqlConnection(
                 "server = localhost; " +
@@ -80,7 +77,6 @@ namespace AppCRUD
             con.Open();
             cmd.ExecuteNonQuery();
 
-            tbxId.Clear();
             tbxNome.Clear();
 
             atualizar_ds();
@@ -102,35 +98,36 @@ namespace AppCRUD
 
 
             MySqlCommand cmd = new MySqlCommand(" select * from usuario ", con);
-            con.Open(); 
-            cmd.ExecuteNonQuery(); 
-            MySqlDataAdapter da = new MySqlDataAdapter(); 
+            con.Open();
+            cmd.ExecuteNonQuery();
+            MySqlDataAdapter da = new MySqlDataAdapter();
             DataSet ds = new DataSet();
-            da.SelectCommand = cmd; 
-            da.Fill(ds); 
-            dgvDados.DataSource = ds; 
+            da.SelectCommand = cmd;
+            da.Fill(ds);
+            dgvDados.DataSource = ds;
             dgvDados.DataMember = ds.Tables[0].TableName;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            tbxId.Text = dgvDados.CurrentRow.Cells[0].Value.ToString();
             tbxNome.Text = dgvDados.CurrentRow.Cells[1].Value.ToString();
 
         }
 
         // Verificar radioButton de tipo de usuário
-        public string verificaTipoUsuario()
+        public string GetTipoUsuarioSelecionado()
         {
             string tipoUsuario = "";
 
-            if(rbtnAluno.Checked)
+            if (rbtnAluno.Checked)
             {
                 tipoUsuario = "Aluno";
-            }else if (rbtnProfessor.Checked)
+            }
+            else if (rbtnProfessor.Checked)
             {
                 tipoUsuario = "Professor";
-            }else if (rbtnServidor.Checked)
+            }
+            else if (rbtnServidor.Checked)
             {
                 tipoUsuario = "Servidor";
             }
