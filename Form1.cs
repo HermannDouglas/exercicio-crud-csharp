@@ -1,4 +1,10 @@
-﻿namespace AppCRUD
+﻿using MySql.Data.MySqlClient;
+using System.Data;
+using System;
+using System.Windows.Forms;
+
+
+namespace AppCRUD
 {
     public partial class Form1 : Form
     {
@@ -20,7 +26,7 @@
             "password = root;");
 
             MySqlCommand cmd = new MySqlCommand(
-                "insert into pessoa values ('" + id +
+                "insert into usuario values ('" + id +
                 "','" + nome +
                 "','" + tipo + "'); "
                 , con);
@@ -36,7 +42,7 @@
         {
             int id = Convert.ToInt32(tbxId.Text);
             string nome = tbxNome.Text;
-            string tipo = "Aluno";
+            string tipo = "Professor";
 
             MySqlConnection con = new MySqlConnection(
                 "server = localhost; " +
@@ -45,7 +51,7 @@
                 "password = root;");
 
             MySqlCommand cmd = new MySqlCommand(
-                "update pessoa set nome = '" + nome +
+                "update usuario set nome = '" + nome +
                 "', tipo = '" + tipo +
                 "' where id = '" + id + "' ",
                 con);
@@ -68,8 +74,7 @@
                 "password = root;");
 
             MySqlCommand cmd = new MySqlCommand(
-                "delete from pessoa where id = '" + id + 
-                "' ",
+                "delete from usuario where id = '" + id + "' ",
                 con);
 
             con.Open();
@@ -96,22 +101,15 @@
                 "password = root;");
 
 
-            MySqlCommand cmd = new MySqlCommand(" select * from pessoa ", con);
-
-            con.Open(); // abre a conex�o com o banco
-            cmd.ExecuteNonQuery(); // executa cmd
-            /*Pronto ap�s o cmd.ExecuteNonQuery(); selecionamos tudo o
-            que tinha dentro do banco,
-            agora os passos seguintes ir�o exibir as informa��es para
-            que o usu�rio possa v�-las
-            */
-            MySqlDataAdapter da = new MySqlDataAdapter(); /* da, adapta o banco de dados ao nosso projeto */
+            MySqlCommand cmd = new MySqlCommand(" select * from usuario ", con);
+            con.Open(); 
+            cmd.ExecuteNonQuery(); 
+            MySqlDataAdapter da = new MySqlDataAdapter(); 
             DataSet ds = new DataSet();
-            da.SelectCommand = cmd; // adapta cmd ao projeto
-            da.Fill(ds); // preenche todas as informa��es dentro do DataSet
-            dgvDados.DataSource = ds; //Datagridview recebe ds j� preenchido
+            da.SelectCommand = cmd; 
+            da.Fill(ds); 
+            dgvDados.DataSource = ds; 
             dgvDados.DataMember = ds.Tables[0].TableName;
-            /*Agora Datagridview exibe o banco de dados*/
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
