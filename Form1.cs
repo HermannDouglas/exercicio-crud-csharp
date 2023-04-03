@@ -17,7 +17,7 @@ namespace AppCRUD
         {
             int id = Convert.ToInt32(tbxId.Text);
             string nome = tbxNome.Text;
-            string tipo = "Aluno";
+            string tipoUsuario = verificaTipoUsuario();
 
             MySqlConnection con = new MySqlConnection(
             "server = localhost; " +
@@ -28,7 +28,7 @@ namespace AppCRUD
             MySqlCommand cmd = new MySqlCommand(
                 "insert into usuario values ('" + id +
                 "','" + nome +
-                "','" + tipo + "'); "
+                "','" + tipoUsuario + "'); "
                 , con);
 
             con.Open();
@@ -42,7 +42,7 @@ namespace AppCRUD
         {
             int id = Convert.ToInt32(tbxId.Text);
             string nome = tbxNome.Text;
-            string tipo = "Professor";
+            string tipoUsuario = verificaTipoUsuario();
 
             MySqlConnection con = new MySqlConnection(
                 "server = localhost; " +
@@ -52,7 +52,7 @@ namespace AppCRUD
 
             MySqlCommand cmd = new MySqlCommand(
                 "update usuario set nome = '" + nome +
-                "', tipo = '" + tipo +
+                "', tipo = '" + tipoUsuario +
                 "' where id = '" + id + "' ",
                 con);
 
@@ -120,18 +120,21 @@ namespace AppCRUD
         }
 
         // Verificar radioButton de tipo de usuário
-        //public string verificaTipoUsuario()
-        //{
-        //    if(rbtnAluno.Checked)
-        //    {
-        //        return "Aluno";
-        //    }else if (rbtnProfessor.Checked)
-        //    {
-        //        return "Professor";
-        //    }else if (rbtnServidor.Checked)
-        //    {
-        //        return "Servidor";
-        //    }
-        //}
+        public string verificaTipoUsuario()
+        {
+            string tipoUsuario = "";
+
+            if(rbtnAluno.Checked)
+            {
+                tipoUsuario = "Aluno";
+            }else if (rbtnProfessor.Checked)
+            {
+                tipoUsuario = "Professor";
+            }else if (rbtnServidor.Checked)
+            {
+                tipoUsuario = "Servidor";
+            }
+            return tipoUsuario;
+        }
     }
 }
